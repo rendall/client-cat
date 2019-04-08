@@ -1,7 +1,6 @@
 # 'node' preset from Github
 
 # Cat Breed
-dist
 *.js
 *.jsx
 
