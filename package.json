@@ -6,8 +6,8 @@
   "author": "Rendall <rendall@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && webpack",
-    "start": "webpack-dev-server --mode development",
+    "build": "tsc && webpack --mode production --config webpack.config.js",
+    "start": "webpack-dev-server --mode development --config webpack.development.js",
     "serve:production": "http-server"
   },
   "devDependencies": {
