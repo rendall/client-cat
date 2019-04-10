@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import { CAT_IMG } from "../../constants";
 import { BreedItem } from "../../common";
+import "./Item.css";
 
 
 interface ItemProps {
@@ -14,10 +15,9 @@ export class Item extends Component<ItemProps>{
   }
   render(){
     return (
-      <li id={this.props.item._id} onClick={ this.props.onItemClick }>
-        <img src={this.props.item.image || CAT_IMG} />
-        <h2>{this.props.item.name}</h2>
-        <p>{this.props.item.country}</p>
+      <li className="Item" id={this.props.item._id} onClick={ this.props.onItemClick }>
+        <img className="Item-Image" src={this.props.item.image || CAT_IMG} />
+        <h2 className="Item-Name">{this.props.item.name}</h2>
       </li>
     );
   }

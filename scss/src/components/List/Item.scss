@@ -1,0 +1,11 @@
+.Item {
+    background-color: white;
+    width: 300px;
+    margin-bottom: 2rem;
+    cursor: pointer;  
+    
+    &-Name{     
+    margin: 0;
+    margin-left: 0.5rem;
+  }
+}

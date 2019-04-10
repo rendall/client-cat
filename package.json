@@ -6,8 +6,8 @@
   "author": "Rendall <rendall@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf ./public/css/*.css && rimraf ./src/**/*.* && rimraf ./public/js/*.js",
-    "build": "tsc && sass scss:./ --no-source-map && postcss ./public/css/style.css -r && webpack --mode production --config webpack.config.js",
+    "prebuild": "rimraf ./public/css/*.css && rimraf ./src/**/*.* && rimraf ./public/js/*.*",
+    "build": "tsc && npx sass --no-source-map scss:./ && postcss ./public/css/style.css -r && webpack --mode production --config webpack.config.js",
     "start": "tsc && webpack-dev-server --mode development --config webpack.development.js",
     "serve:production": "http-server",
     "watch": "concurrently \"tsc --watch\" \"sass scss:./ --watch\" \"webpack --watch --mode development --config webpack.development.js\""
@@ -22,6 +22,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/webpack": "^4.4.27",
     "@types/webpack-dev-server": "^3.1.5",
+    "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
     "concurrently": "^4.1.0",
     "css-loader": "^2.1.1",
