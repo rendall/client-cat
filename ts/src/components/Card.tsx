@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Breed } from "../common";
 import { CAT_IMG, BREEDS_API } from "../constants";
+import "./Card.css";
 
 interface CardProps {
   id:string;
@@ -40,16 +41,16 @@ export class Card extends Component<CardProps, CardState> {
         <p>{this.state.error}</p> 
         : this.doShowCard()?
         <article>
-          <img src={this.state.breed!.image || CAT_IMG} />
-          <h2>{this.state.breed!.name}</h2>
-          <p>{createDescription(this.state.breed!)}</p>
-          <button onClick={this.props.onCloseClick}>close</button>
+          <img className="Card-Image" src={this.state.breed!.image || CAT_IMG} />
+          <h2 className="Card-Name">{this.state.breed!.name}</h2>
+          <p className="Card-Description">{createDescription(this.state.breed!)}</p>
+          <button className="Card-Button--close" onClick={this.props.onCloseClick}>X</button>
         </article>
         : 
-        <p>Card: Please wait</p>
+        <p></p>
       }</div>)
   }
 }
 
-const aAn = (word: string) => ("aeiou".indexOf(word[0]) >= 0 ? "an" : "a"); // This function returns 'a' or 'an' depending on whether 'word' starts with a vowel
+const aAn = (word: string) => ("aeiou".indexOf(word.trim()[0]) >= 0 ? "an" : "a"); // This function returns 'a' or 'an' depending on whether 'word' starts with a vowel
 const createDescription = (breed: Breed): string => `The ${breed.name} has ${aAn( breed.temperament)} ${breed.temperament.toLowerCase()} temperament`;
