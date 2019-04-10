@@ -28,7 +28,7 @@ export class Card extends Component<CardProps, CardState> {
       .catch(reason => this.setState({error:reason}));
   }
 
-  onCardClose= (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => this.setState({breed:null}) 
+  onCardClose= (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => this.setState({breed:null}) 
 
   doShowError = () => this.state && this.state.error
   doShowCard = () => this.state && this.state.breed
