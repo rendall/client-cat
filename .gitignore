@@ -6,6 +6,7 @@
 *.css
 *.css.map
 *.hot-update.json
+RAW/
 
 # Logs
 logs
