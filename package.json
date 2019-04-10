@@ -6,7 +6,7 @@
   "author": "Rendall <rendall@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && webpack --mode production --config webpack.config.js",
+    "build": "tsc && sass scss:./ && webpack --mode production --config webpack.config.js",
     "start": "tsc && webpack-dev-server --mode development --config webpack.development.js",
     "serve:production": "http-server",
     "watch": "concurrently \"tsc --watch\" \"sass scss:./ --watch\" \"webpack --watch --mode development --config webpack.development.js\""
