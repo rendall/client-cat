@@ -3,6 +3,9 @@
 # Cat Breed
 *.js
 *.jsx
+*.css
+*.css.map
+*.hot-update.json
 
 # Logs
 logs

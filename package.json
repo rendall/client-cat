@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc && webpack --mode production --config webpack.config.js",
     "start": "tsc && webpack-dev-server --mode development --config webpack.development.js",
-    "serve:production": "http-server"
+    "serve:production": "http-server",
+    "watch": "concurrently \"tsc --watch\" \"sass scss:./ --watch\" \"webpack --watch --mode development --config webpack.development.js\""
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -21,8 +22,10 @@
     "@types/webpack": "^4.4.27",
     "@types/webpack-dev-server": "^3.1.5",
     "babel-loader": "^8.0.5",
+    "concurrently": "^4.1.0",
     "css-loader": "^2.1.1",
     "http-server": "^0.11.1",
+    "sass": "^1.18.0",
     "style-loader": "^0.23.1",
     "ts-node": "^8.0.3",
     "typescript": "^3.4.2",
