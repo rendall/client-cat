@@ -1,8 +1,8 @@
 .Card {
     position: fixed;
     background-color: mediumaquamarine;
-    width: 30rem;
-    margin-left: -15rem;
+    width: 22rem;
+    margin-left: -11rem;
     left: 50%;
     top: 3rem;
 
@@ -12,7 +12,7 @@
 
     &-Image {
       width: 300px;
-      margin-left: calc(15rem - 150px);
+      margin-left: calc(11rem - 150px);
     }
 
     &-Name {
@@ -21,8 +21,6 @@
     }
 
     &-Description {
-      max-width: 23rem;
-      margin-left: 3.5rem;
       text-align: center;
       margin-top: 0.5rem;
     }
