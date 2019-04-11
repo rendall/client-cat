@@ -19,13 +19,17 @@ All development is done in the `./ts` and `./scss` directories, which each mirro
 - `npm run watch` (builds the site when files change)
 - `npm run start` (serves the app from localhost with hotloading)
 
+Formatting is via [Prettier](https://prettier.io/)
+
 ## production
 
-Building the production version of the application is with the command:
+Note that it is not necessary to build application locally. It builds automatically upon deploy.
+
+However, building the production version of the application is with the command:
 
 - `npm run build` (compiles, bundles and moves optimized code into `/public`)
 
-`/public` is the directory from which the application is served. 
+`/public` is the directory from which the application is served.
 
 To see this version locally before deployment, this command will serve it locally:
 
