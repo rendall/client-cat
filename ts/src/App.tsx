@@ -4,6 +4,7 @@ import { List } from "./components/List";
 import { Card } from "./components/Card";
 import { Search } from "./components/Search";
 import { Filter } from "./components/Filter";
+import { Spinner } from "./components/Spinner";
 import { BREEDS_API } from "./constants";
 import { BreedItem } from "./common";
 import "./App.css";
@@ -101,7 +102,7 @@ class App extends Component<AppProps, AppState> {
             onItemClick={this.onItemClick}
           />
         ) : (
-          <p>App: please wait</p>
+          <Spinner />
         )}
         <Search onSearchChange={this.onSearchChange} />
       </div>

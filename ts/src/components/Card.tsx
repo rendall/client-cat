@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Breed } from "../common";
 import { CAT_IMG, BREEDS_API } from "../constants";
 import "./Card.css";
+import { Spinner } from "./Spinner";
 
 interface CardProps {
   id: string;
@@ -59,7 +60,7 @@ export class Card extends Component<CardProps, CardState> {
             </button>
           </article>
         ) : (
-          <p />
+          <Spinner />
         )}
       </div>
     );
