@@ -2,9 +2,9 @@
 
 // Below some width, the selection panel needs to move out of the way.
 // This is that width:
-$max-width-panel-toggle: 40rem;
+$max-width-panel-toggle: 38rem;
 // This is the width of the selection panel:
-$selection-panel-width: 30rem;
+$selection-panel-width: 27rem;
 
 html {
 background-color: gray
@@ -12,19 +12,44 @@ background-color: gray
 
   .panel {
     &-toggle{
+      padding: 0;
+      left: 0;
+      width: 3rem;
+      height: 3rem;
+      color: unset;
+      border: unset;
+      background-color: darkgray;
       display: none;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-x: -0.5rem;
+      appearance: none;
 
+      transition-property: left;
+      transition-duration: 1s;
+
+      background-image: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" fill="dark gray" x="0px" y="0px" viewBox="0 0 841.9 595.3" style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve"><path d="M528.9,297.2"/><path d="M313.3,502.8c0,2,1.2,3.8,3.1,4.6c1.9,0.8,4,0.3,5.4-1.1l205.6-205.6c1-1,1.5-2.3,1.5-3.5s-0.5-2.6-1.5-3.5L321.9,88.2  c-1.3-1.4-3.5-1.9-5.5-1.1c-1.9,0.8-3.1,2.6-3.1,4.6L313.3,502.8z"/></svg>');
+
+      &.is-toggled {
+        & + .panel-selection {
+          margin-left: 0;
+        }
+
+        left:13rem;
+        
+        background-position-x: -0.8rem;
+        background-image: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" fill="dark gray" x="0px" y="0px" viewBox="0 0 841.9 595.3" style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve"><path d="M528.9,297.2"/><path d="M528.9,91.7c0-2-1.2-3.8-3.1-4.6s-4-0.3-5.4,1.1L314.8,293.8c-1,1-1.5,2.3-1.5,3.5s0.5,2.6,1.5,3.5l205.5,205.5  c1.3,1.4,3.5,1.9,5.5,1.1c1.9-0.8,3.1-2.6,3.1-4.6L528.9,91.7z"/></svg>');
+      }
+
+      &:focus {
+        outline: dimgray auto 1px;
+
+      }
       @media (max-width: $max-width-panel-toggle) {
         display: block;
         position: absolute;
       }
       
-      &:checked {
-        & + .panel-selection {
-          margin-left: 0;
-        }
-      }
-
     }
 
     &-selection{

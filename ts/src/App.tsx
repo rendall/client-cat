@@ -5,6 +5,7 @@ import { Card } from "./components/Card";
 import { Search } from "./components/Search";
 import { Filter } from "./components/Filter";
 import { Spinner } from "./components/Spinner";
+import { Toggle } from "./components/Toggle";
 import { BREEDS_API } from "./constants";
 import { BreedItem } from "./common";
 import { uniq, formatReason, normalizeCountry, XFetch } from "./utilities";
@@ -107,10 +108,7 @@ class App extends Component<AppProps, AppState> {
           <Spinner />
         )}
         {this.doShowList() ? (
-          <label htmlFor="panel-toggle"></label>
-        ):null}
-        {this.doShowList() ? (
-          <input type="checkbox" name="panel-toggle" className="panel-toggle"/>
+          <Toggle/>
         ):null}
         {this.doShowList() ? (
         <div className="panel-selection">
