@@ -1,12 +1,49 @@
 @import "_normalize";
 
+// Below some width, the selection panel needs to move out of the way.
+// This is that width:
+$max-width-panel-toggle: 40rem;
+// This is the width of the selection panel:
+$selection-panel-width: 30rem;
+
 html {
-min-height: 100%;
-background: rgba(183,222,237,1);
-background: -moz-linear-gradient(top, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
-background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(183,222,237,1)), color-stop(50%, rgba(113,206,239,1)), color-stop(51%, rgba(33,180,226,1)), color-stop(100%, rgba(183,222,237,1)));
-background: -webkit-linear-gradient(top, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
-background: -o-linear-gradient(top, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
-background: -ms-linear-gradient(top, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
-background: linear-gradient(to bottom, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);
+background-color: gray
 }
+
+  .panel {
+    &-toggle{
+      display: none;
+
+      @media (max-width: $max-width-panel-toggle) {
+        display: block;
+        position: absolute;
+      }
+      
+      &:checked {
+        & + .panel-selection {
+          margin-left: 0;
+        }
+      }
+
+    }
+
+    &-selection{
+      order: 0;
+      background-color: darkgray;
+      width: $selection-panel-width; 
+      overflow-y: auto;
+
+      transition-property: margin-left;
+      transition-duration: 1s;
+
+      @media (max-width: $max-width-panel-toggle) {
+        margin-left: -$selection-panel-width;
+      }
+    }
+
+    &-display {
+      order: 1;
+      overflow-y: auto;
+      width: 100%;
+    }
+  }

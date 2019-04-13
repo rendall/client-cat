@@ -1,8 +1,15 @@
 .Item {
     background-color: white;
     width: 300px;
-    margin-bottom: 2rem;
+    margin: 1rem;
+    vertical-align: top;
+    display: inline-grid;
     cursor: pointer;  
+
+    &-ImageContainer {
+      height: 250px;
+      overflow: hidden;
+    }
     
     &-Name{     
     margin: 0;

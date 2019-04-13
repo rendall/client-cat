@@ -7,6 +7,7 @@ import { Filter } from "./components/Filter";
 import { Spinner } from "./components/Spinner";
 import { BREEDS_API } from "./constants";
 import { BreedItem } from "./common";
+import { uniq, formatReason, normalizeCountry, XFetch } from "./utilities";
 import "./App.css";
 
 interface AppProps {}
@@ -24,18 +25,22 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentWillMount = () => {
-    fetch(BREEDS_API)
-      .then(response => response.json())
+    XFetch(BREEDS_API)
+      .then(
+        response => response.json(),
+        (error: Error | string) => this.setState({ error: formatReason(error) })
+      )
       .then(json =>
         this.setState({ breeds: json, breedList: json, filteredCountries: [] })
-      )
-      .catch(reason => this.setState({ error: reason }));
+      );
   };
 
   onItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
     this.setState({ card: event.currentTarget.id });
+
   onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
     this.setState({ card: null });
+
   onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
     const searchBreeds: BreedItem[] =
@@ -85,54 +90,40 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div className="App">
-        {this.doShowList() ? (
-          <Filter
-            countries={this.extractCountries(this.state.breeds)}
-            onFilterChange={this.onFilterChange}
-          />
+        {this.doShowError() ? (
+          <p className="Error">{this.state.error}</p>
         ) : null}
         {this.doShowCard() ? (
           <Card id={this.state.card!} onCloseClick={this.onCardClose} />
         ) : null}
-        {this.doShowError() ? (
-          <p>{this.state.error}</p>
-        ) : this.doShowList() ? (
+        {this.doShowList() ? (
+        <div className="panel-display">
           <List
             breedList={this.state.breedList}
             onItemClick={this.onItemClick}
           />
-        ) : (
+          </div>
+        ) : this.doShowError() ? null : (
           <Spinner />
         )}
-        <Search onSearchChange={this.onSearchChange} />
+        {this.doShowList() ? (
+          <label htmlFor="panel-toggle"></label>
+        ):null}
+        {this.doShowList() ? (
+          <input type="checkbox" name="panel-toggle" className="panel-toggle"/>
+        ):null}
+        {this.doShowList() ? (
+        <div className="panel-selection">
+          <Filter
+            countries={this.extractCountries(this.state.breeds)}
+            onFilterChange={this.onFilterChange}
+          />
+          <Search onSearchChange={this.onSearchChange} />
+        </div>
+        ) : null}
       </div>
     );
   }
 }
-
-const uniq = (arr: any[], uq: any[] = [], i = 0): any[] =>
-  i >= arr.length
-    ? uq
-    : uq.indexOf(arr[i]) === -1
-    ? uniq(arr, uq.concat([arr[i]]), i + 1)
-    : uniq(arr, uq, i + 1);
-const normalizeCountry = (country: string) => {
-  /** Reduce a country from the verbose 'Developed in Ukraine (with stock from Asia)' to just 'Ukraine' */
-  const devStart = "Developed in ";
-  const noDev = country.startsWith(devStart)
-    ? country.substr(devStart.length)
-    : country;
-  const noThe = noDev.startsWith("the ") ? noDev.substr(4) : noDev;
-
-  const parIndex = noThe.indexOf(" (");
-  const noPar = parIndex >= 0 ? noThe.substr(0, parIndex) : noThe;
-  const semiColIndex = noPar.indexOf("; ");
-  const noSemiCol = semiColIndex >= 0 ? noPar.substr(0, semiColIndex) : noPar;
-  const commaIndex = noSemiCol.indexOf(",");
-  const noComma = commaIndex >= 0 ? noSemiCol.substr(0, commaIndex) : noSemiCol;
-  const andIndex = noComma.indexOf(" and");
-  const noAnd = andIndex >= 0 ? noComma.substr(0, andIndex) : noComma;
-  return noAnd;
-};
 
 export default hot(App);

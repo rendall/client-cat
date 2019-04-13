@@ -1,10 +1,11 @@
 .Card {
     position: fixed;
-    background-color: mediumaquamarine;
+    background-color: lightgray;
     width: 22rem;
     margin-left: -11rem;
     left: 50%;
     top: 3rem;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.2);
 
     article {
       padding-top: 2rem;

@@ -3,6 +3,7 @@ import { Breed } from "../common";
 import { CAT_IMG, BREEDS_API } from "../constants";
 import "./Card.css";
 import { Spinner } from "./Spinner";
+import { XFetch, formatReason } from "../utilities";
 
 interface CardProps {
   id: string;
@@ -24,11 +25,10 @@ export class Card extends Component<CardProps, CardState> {
   componentWillMount = () => {
     const URI = `${BREEDS_API}/${this.props.id}`;
     console.log("componentWillMount", URI);
-    fetch(URI)
+    XFetch(URI)
       .then(response => response.json())
       .then(json => this.setState({ breed: json }))
-      .then(() => console.log("state:", this.state))
-      .catch(reason => this.setState({ error: reason }));
+      .catch(reason => this.setState({ error: formatReason(reason) }));
   };
 
   onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
@@ -52,6 +52,7 @@ export class Card extends Component<CardProps, CardState> {
             <p className="Card-Description">
               {createDescription(this.state.breed!)}
             </p>
+            <p className="Card-Description">{this.state.breed!.country}</p>
             <button
               className="Card-Button--close"
               onClick={this.props.onCloseClick}
@@ -68,7 +69,7 @@ export class Card extends Component<CardProps, CardState> {
 }
 
 const aAn = (word: string) =>
-  "aeiou".indexOf(word.trim()[0]) >= 0 ? "an" : "a"; // This function returns 'a' or 'an' depending on whether 'word' starts with a vowel
+  "aeiouAEIOU".indexOf(word.trim()[0]) >= 0 ? "an" : "a"; // This function returns 'a' or 'an' depending on whether 'word' starts with a vowel
 const createDescription = (breed: Breed): string =>
   `The ${breed.name} has ${aAn(
     breed.temperament
