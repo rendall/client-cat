@@ -1,6 +1,21 @@
 .Filter {
-  margin: 1rem 0.5rem;
+  margin: 0 0.5rem;
+
+  h2 {
+    display: inline-block;
+    margin: 1rem 0 0.4rem 0;
+    font-size: 1.4rem;
+  }
+
   &-Item {
     display: block;
+
+    &.is-focused {
+      text-decoration: underline;
+    }
+
+    input[type=checkbox]{
+      margin-right: 0.5rem;
+    }
   }
 }

@@ -36,7 +36,7 @@ class App extends Component<AppProps, AppState> {
       );
   };
 
-  onItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
+  onItemClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
     this.setState({ card: event.currentTarget.id });
 
   onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
@@ -98,6 +98,18 @@ class App extends Component<AppProps, AppState> {
           <Card id={this.state.card!} onCloseClick={this.onCardClose} />
         ) : null}
         {this.doShowList() ? (
+          <Toggle/>
+        ):null}
+        {this.doShowList() ? (
+        <div className="panel-selection">
+          <Filter
+            countries={this.extractCountries(this.state.breeds)}
+            onFilterChange={this.onFilterChange}
+            onSearchChange={this.onSearchChange}
+          />
+        </div>
+        ) : null}
+        {this.doShowList() ? (
         <div className="panel-display">
           <List
             breedList={this.state.breedList}
@@ -107,18 +119,6 @@ class App extends Component<AppProps, AppState> {
         ) : this.doShowError() ? null : (
           <Spinner />
         )}
-        {this.doShowList() ? (
-          <Toggle/>
-        ):null}
-        {this.doShowList() ? (
-        <div className="panel-selection">
-          <Filter
-            countries={this.extractCountries(this.state.breeds)}
-            onFilterChange={this.onFilterChange}
-          />
-          <Search onSearchChange={this.onSearchChange} />
-        </div>
-        ) : null}
       </div>
     );
   }

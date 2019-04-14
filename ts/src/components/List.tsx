@@ -5,7 +5,7 @@ import "./List.css";
 
 interface ListProps {
   breedList: BreedItem[];
-  onItemClick: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onItemClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export class List extends Component<ListProps> {
@@ -14,7 +14,7 @@ export class List extends Component<ListProps> {
   }
   render() {
     return (
-      <ul className="List">
+      <div className="List">
         {this.props.breedList.map(breedItem => (
           <Item
             key={breedItem._id}
@@ -22,7 +22,7 @@ export class List extends Component<ListProps> {
             onItemClick={this.props.onItemClick}
           />
         ))}
-      </ul>
+      </div>
     );
   }
 }

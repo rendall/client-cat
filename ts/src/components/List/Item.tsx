@@ -5,7 +5,7 @@ import "./Item.css";
 
 interface ItemProps {
   item: BreedItem;
-  onItemClick: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onItemClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export class Item extends Component<ItemProps> {
@@ -14,7 +14,7 @@ export class Item extends Component<ItemProps> {
   }
   render() {
     return (
-      <li
+      <button
         className="Item"
         id={this.props.item._id}
         onClick={this.props.onItemClick}
@@ -24,7 +24,7 @@ export class Item extends Component<ItemProps> {
         </div>
 
         <h2 className="Item-Name">{this.props.item.name}</h2>
-      </li>
+      </button>
     );
   }
 }
