@@ -7,6 +7,7 @@
 *.css.map
 *.hot-update.json
 RAW/
+cypress/screenshots/
 
 # Logs
 logs
