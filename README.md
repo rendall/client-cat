@@ -4,7 +4,7 @@
 
 Scroll through pictures of cats, and get more information by clicking on the picture. Close the placard by clicking the 'x' on its upper right. Filter breeds by country by clicking the checkboxes on the right. Search the names of breeds by using the search field along the bottom.
 
-Live on [Netlify](https://focused-hopper-524564.netlify.com/)
+Live <https://focused-hopper-524564.netlify.com/>
 
 ## installation
 
