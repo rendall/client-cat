@@ -4,9 +4,11 @@ export interface Breed {
   country: string;
   origin: string;
   coat: string;
+  bodyType: string;
   pattern: string;
   temperament: string;
   image: string;
+  [key: string]: string;
 }
 
 // This is a more limited version of the Breed object

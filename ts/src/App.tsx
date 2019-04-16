@@ -2,7 +2,6 @@ import { hot } from "react-hot-loader/root";
 import React, { Component } from "react";
 import { List } from "./components/List";
 import { Card } from "./components/Card";
-import { Search } from "./components/Search";
 import { Filter } from "./components/Filter";
 import { Spinner } from "./components/Spinner";
 import { Toggle } from "./components/Toggle";
@@ -18,6 +17,7 @@ interface AppState {
   card?: string | null;
   error?: string;
   filteredCountries: string[];
+  lastFocus?: EventTarget;
 }
 
 class App extends Component<AppProps, AppState> {
@@ -37,10 +37,12 @@ class App extends Component<AppProps, AppState> {
   };
 
   onItemClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-    this.setState({ card: event.currentTarget.id });
+    this.setState({ card: event.currentTarget.id, lastFocus:event.target });
 
-  onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+  onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (!!this.state.lastFocus) ( this.state.lastFocus as HTMLButtonElement ).focus();
     this.setState({ card: null });
+  }
 
   onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
@@ -72,7 +74,6 @@ class App extends Component<AppProps, AppState> {
         );
       this.setState({ breedList: checkFilter });
     }
-
     this.setState({ filteredCountries: filtered });
   };
 
@@ -97,24 +98,23 @@ class App extends Component<AppProps, AppState> {
         {this.doShowCard() ? (
           <Card id={this.state.card!} onCloseClick={this.onCardClose} />
         ) : null}
+        {this.doShowList() ? <Toggle /> : null}
+        {this.doShowCard() ? <div className="dialog-overlay" /> : null}
         {this.doShowList() ? (
-          <Toggle/>
-        ):null}
-        {this.doShowList() ? (
-        <div className="panel-selection">
-          <Filter
-            countries={this.extractCountries(this.state.breeds)}
-            onFilterChange={this.onFilterChange}
-            onSearchChange={this.onSearchChange}
-          />
-        </div>
+          <div className="panel-selection">
+            <Filter
+              countries={this.extractCountries(this.state.breeds)}
+              onFilterChange={this.onFilterChange}
+              onSearchChange={this.onSearchChange}
+            />
+          </div>
         ) : null}
         {this.doShowList() ? (
-        <div className="panel-display">
-          <List
-            breedList={this.state.breedList}
-            onItemClick={this.onItemClick}
-          />
+          <div className="panel-display">
+            <List
+              breedList={this.state.breedList}
+              onItemClick={this.onItemClick}
+            />
           </div>
         ) : this.doShowError() ? null : (
           <Spinner />

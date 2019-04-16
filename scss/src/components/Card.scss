@@ -1,28 +1,50 @@
 .Card {
     position: fixed;
     background-color: lightgray;
-    width: 22rem;
-    margin-left: -11rem;
-    left: 50%;
-    top: 3rem;
     box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 13rem;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s;
+    outline: solid black 2px;
 
     article {
-      padding-top: 2rem;
+      padding: 0.5rem;
+    }
+
+    &-Display {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    &-ImageContainer {
+      @media (max-height: 640px) {
+        max-height: 19rem;
+        overflow: hidden;
+      }
     }
 
     &-Image {
       width: 300px;
-      margin-left: calc(11rem - 150px);
+    }
+
+    &-Copy {
+      display: inline-block;
+      width: 18rem;
+      list-style: none;
+      vertical-align: top;
+      margin: 0;
+      padding: 0;
     }
 
     &-Name {
-      text-align: center;
       margin: 0;
     }
 
-    &-Description {
-      text-align: center;
+    &-Country, &-Description, &-Origin {
       margin-top: 0.5rem;
     }
 
@@ -31,4 +53,9 @@
       top: 0;
       right: 0;
     }
+
+    @media (max-width: 39rem) {
+      max-width: 20rem;
+    }
+
 }
