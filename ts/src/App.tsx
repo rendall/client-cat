@@ -9,6 +9,7 @@ import { BREEDS_API } from "./constants";
 import { BreedItem } from "./common";
 import { uniq, formatReason, normalizeCountry, XFetch } from "./utilities";
 import "./App.css";
+import { setPreventTabbing, onEscape } from "./keyboard";
 
 interface AppProps {}
 interface AppState {
@@ -18,13 +19,10 @@ interface AppState {
   error?: string;
   filteredCountries: string[];
   lastFocus?: EventTarget;
+  escapeListener?: () => void;
 }
 
 class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-  }
-
   componentWillMount = () => {
     XFetch(BREEDS_API)
       .then(
@@ -36,13 +34,32 @@ class App extends Component<AppProps, AppState> {
       );
   };
 
-  onItemClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-    this.setState({ card: event.currentTarget.id, lastFocus:event.target });
+  componentWillUpdate = (prevProps: AppProps, prevState: AppState) => {
+    const isCardChange =
+      !!prevState && !!this.state && prevState.card !== this.state.card;
 
-  onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (!!this.state.lastFocus) ( this.state.lastFocus as HTMLButtonElement ).focus();
+    if (isCardChange) {
+      const didCardClose = !prevState.card && !!this.state.card;
+      const didCardOpen = !didCardClose;
+      setPreventTabbing(didCardOpen);
+      if (didCardClose)
+        // handle focus
+        (this.state.lastFocus as HTMLButtonElement).focus();
+      if (didCardOpen)
+        // handle escape key
+        this.setState({ escapeListener: onEscape(this.onEscapeKey) });
+      else this.state.escapeListener!();
+    }
+  };
+
+  onItemClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+    this.setState({
+      card: event.currentTarget.id,
+      lastFocus: event.currentTarget
+    });
+  onCardClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
     this.setState({ card: null });
-  }
+  onEscapeKey = (event: KeyboardEvent) => this.setState({ card: null });
 
   onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
@@ -99,7 +116,9 @@ class App extends Component<AppProps, AppState> {
           <Card id={this.state.card!} onCloseClick={this.onCardClose} />
         ) : null}
         {this.doShowList() ? <Toggle /> : null}
-        {this.doShowCard() ? <div className="dialog-overlay" /> : null}
+        {this.doShowCard() ? (
+          <div className="dialog-overlay" tabIndex={-1} />
+        ) : null}
         {this.doShowList() ? (
           <div className="panel-selection">
             <Filter

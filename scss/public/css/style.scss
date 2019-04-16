@@ -1,4 +1,5 @@
 @import "_normalize";
+@import "_zIndex";
 
 // Below some width, the selection panel needs to move out of the way.
 // This is that width:
@@ -101,4 +102,12 @@ button.no-button {
     overflow-y: auto;
     width: 100%;
   }
+}
+.dialog-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  background-color: rgba(0,0,0,0.7);
 }
