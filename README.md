@@ -50,3 +50,4 @@ The app will publish automatically whenever changes are pushed to the `master` b
 
 - Combine the `./ts` and `./scss` directories for easier development
 - Remove `setState` and add hooks
+- Add a11y tests
