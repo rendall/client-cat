@@ -8,11 +8,11 @@
   "scripts": {
     "prebuild": "rimraf ./public/css/*.css && rimraf ./src/**/*.* && rimraf ./public/js/*.*",
     "build": "tsc && npx sass --no-source-map scss:./ && postcss ./public/css/style.css -r && webpack --mode production --config webpack.config.js",
-    "start": "tsc && webpack-dev-server --mode development --config webpack.development.js",
+    "serve": "tsc && webpack-dev-server --mode development --config webpack.development.js",
+    "serve:production": "http-server",
     "pretests": "rimraf ./cypress/videos/**/*.* && rimraf ./cypress/screenshots/**/*.*",
     "tests": "cypress run",
-    "serve:production": "http-server",
-    "watch": "concurrently \"tsc --watch\" \"sass scss:./ --watch\" \"postcss ./public/css/style.css -r --watch\" \"webpack --watch --mode development --config webpack.development.js\""
+    "watch": "concurrently \"tsc --watch\" \"sass scss:./ --watch\" \"postcss ./public/css/style.css --replace --watch\" \"webpack --watch --mode development --config webpack.development.js\""
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
