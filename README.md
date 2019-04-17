@@ -1,4 +1,4 @@
-# client-cat
+# Client-cat
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1ad74931-4ea6-4086-ad90-3e1aa4d4e3ac/deploy-status)](https://app.netlify.com/sites/focused-hopper-524564/deploys)
 
@@ -6,12 +6,13 @@ Scroll through pictures of cats, and get more information by clicking on the pic
 
 Live on [Netlify](https://focused-hopper-524564.netlify.com/)
 
-## installation
+## Installation
 
-- clone the repository & cd into its directory
+- Clone the repository & cd into its directory
 - `npm install`
+  - (or `yarn install`, although I have noticed that yarn seems to hang the auto-build sometimes, so this project uses npm)
 
-## development
+## Development
 
 All development is done in the `./ts` and `./scss` directories, which each mirror the project directory. Development is easiest with these commands in order:
 
@@ -21,7 +22,7 @@ All development is done in the `./ts` and `./scss` directories, which each mirro
 
 Formatting is via [Prettier](https://prettier.io/)
 
-## production
+## Production
 
 Note that it is not necessary to build application locally. It builds automatically upon deploy.
 
@@ -35,7 +36,7 @@ To see this version locally before deployment, this command will serve it locall
 
 - `npm run serve:production`
 
-## deployment
+## Deployment
 
 The app will publish automatically whenever changes are pushed to the `master` branch. You can set up your own version by:
 
@@ -47,7 +48,5 @@ The app will publish automatically whenever changes are pushed to the `master` b
 
 ## TODO
 
-- combine the `./ts` and `./scss` directories for easier development
-- make the app more responsive to different device sizes
-- expose more of the information about cat breeds that is availabe in the API (coat, pattern, body type, etc)
-- add frontend testing (e.g. with [cypress](https://cypress.io))
+- Combine the `./ts` and `./scss` directories for easier development
+- Remove `setState` and add hooks
