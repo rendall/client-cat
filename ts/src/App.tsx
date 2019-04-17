@@ -72,6 +72,11 @@ class App extends Component<AppProps, AppState> {
     this.setState({ breedList: searchBreeds });
   };
 
+  onOverlayClick = (e:React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    this.setState({ card: null });
+  }
+
   onFilterChange = (event: any) => {
     // Add country to (or remove it from) the array of filteredCountries
     const filtered = event.target.checked
@@ -117,7 +122,7 @@ class App extends Component<AppProps, AppState> {
         ) : null}
         {this.doShowList() ? <Toggle /> : null}
         {this.doShowCard() ? (
-          <div className="dialog-overlay" tabIndex={-1} />
+          <div className="dialog-overlay" tabIndex={-1} onClick={this.onOverlayClick} />
         ) : null}
         {this.doShowList() ? (
           <div className="panel-selection">
